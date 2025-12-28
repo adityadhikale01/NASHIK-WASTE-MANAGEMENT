@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Garbage Tracking, Scrap Selling & Complaints</title>
+  
+  <!-- External Styles and Libraries -->
+  <!-- cdn fond awesome-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" />
+  <!-- Google fonts-->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <link rel="icon" href="./image/Waste_Management_logo.svg">
+  <link rel="stylesheet" href="general.css">
+  <!-- Internal Styles -->
+  <style>
+    :root {
+      --green: #28a745;
+      --light-green: #e6f9ec;
+      --dark-green: #155724;
+    }
+   
+    .title_of_pg { text-align: center; padding: 20px; color: var(--dark-green); }
+    #map {
+      height: 500px;
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      touch-action: pan-x pan-y !important;
+      pointer-events: auto !important;
+    }
+    .sub_header {
+        top: 72px;
+    }
+    .container {
+      max-width: 80%;
+      margin: auto;
+      background: rgba(255,255,255,0.9);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    }
+    h3 { color: var(--dark-green); }
+    form { margin-top: 20px; }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #2e7d32;
+    }
+    input, select, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #c3e6cb;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    button {
+      background-color: var(--green);
+      color: #fff;
+      cursor: pointer;
+      transition: .3s;
+    }
+    .category-btn{
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+
+    }
+    button:hover { background-color: #218838; }
+    .toast {
+      display: none;
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--green);
+      color: white;
+      padding: 15px 20px;
+      border-radius: 10px;
+      animation: fadeInOut 3s ease;
+    }
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: translateY(20px); }
+      10%, 90% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(20px); }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="section1">
+    <header>
+    <div class="logo"></div>
+    <div class="slogan">
+         <h1 >Smart City Initiative</h1>
+         <p>:Together For Cleaner City</p>
+    </div>
+  
+  </header>
+   <div class="sub_header" style="z-index: 1007;">
+    <nav>
+      <ul>
+        <li><a href="#">Map</a></li>
+        <li><a href="#sellForm">Scrap Selling</a></li>
+        <li><a href="#complaintForm">Illigal Dumping</a></li>
+        <li><a href="#app">Digital App</a></li>
+        <li><a href="aboutus.html">Contact</a></li>
+      </ul>
+    </nav>
+ </div>
+<div class="empty-box"></div>
+
+  <div class="container">
+    <div class="title_of_pg">
+      <h2>Garbage Truck Tracking, Scrap Selling & Complaints</h2>
+    </div>
+   <div  class="category-btn" style="margin-bottom: 15px;">
+      <button onclick="showCategory('dustbins')" class="btn btn-success">🗑️ Show Dustbins</button>
+      <button onclick="showCategory('scrapshops')" class="btn btn-warning">🏭 Show Scrap Shops</button>
+      <button onclick="showCategory('truck')" class="btn btn-primary">🚛 Show Garbage Truck</button>
+   </div>
+
+
+
+    <h3>Live Garbage Truck Tracking</h3>
+    <div id="map"></div>
+    <button id="nearbyBtn" style="background:#17a2b8;">🔎 Show Nearby Dustbins</button>
+    <ul id="nearbyList" style="margin-top:15px; list-style:disc; padding-left:20px;"></ul>
+
+    <!-- Scrap Selling -->
+    <h3>Sell Your Scrap</h3>
+    <form id="sellForm">
+      <label for="shopSelect">Choose Scrap Shop</label>
+      <select id="shopSelect" required></select>
+      <label for="item">Scrap Item</label>
+      <input id="item" placeholder="e.g., Plastic Bottles" required />
+      <label for="quantity">Quantity (kg)</label>
+      <input type="number" id="quantity" placeholder="e.g., 5" required />
+      <button type="submit">Submit Selling Request</button>
+      <div id="status"></div>
+    </form>
+
+
+  </div>
+
+</div>
+  <!-- section2 -->
+ <%- include('includes/section2.ejs') %>
+
+  <!-- Leaflet and JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+  <script>
+    // ✅ ICONS
+    const truckIcon = L.icon({
+      iconUrl: 'image/truck-icon.png',
+      iconSize: [40, 40],
+      iconAnchor: [20, 40],
+      popupAnchor: [0, -40]
+    });
+
+    const dustbinIcon = L.icon({
+      iconUrl: 'image/dustbin-icon.png',
+      iconSize: [30, 30],
+      iconAnchor: [15, 30],
+      popupAnchor: [0, -30]
+    });
+
+    const scrapShopIcon = L.icon({
+      iconUrl: 'image/scrapshop-icon.png',
+      iconSize: [30, 30],
+      iconAnchor: [15, 30],
+      popupAnchor: [0, -30]
+    });
+
+    // ✅ Initialize map
+    const map = L.map('map', {
+      center: [19.9975, 73.7898],
+      zoom: 13
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution:'&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    const locations = [
+      { coords: [19.995, 73.78], name: "Dustbin 1", type: "Dustbin" },
+      { coords: [19.992, 73.785], name: "Dustbin 2", type: "Dustbin" },
+      { coords: [20.029098, 73.852004], name: "Dustbin 3", type: "Dustbin" },
+      { coords: [20.016916, 73.825348], name: "Dustbin 4", type: "Dustbin" },
+      { coords: [20.000, 73.79], name: "Scrap Shop A", type: "Scrap Shop" },
+      { coords: [20.003, 73.80], name: "Scrap Shop B", type: "Scrap Shop" }
+    ];
+
+    const scrapShops = [];
+
+    locations.forEach(loc => {
+      let icon;
+      if (loc.type === "Dustbin") icon = dustbinIcon;
+      else if (loc.type === "Scrap Shop") {
+        icon = scrapShopIcon;
+        scrapShops.push(loc);
+      }
+
+      L.marker(loc.coords, { icon }).addTo(map)
+        .bindPopup(`<b>${loc.name}</b><br>${loc.type}`);
+    });
+
+    const shopSelect = document.getElementById('shopSelect');
+    scrapShops.forEach(shop => {
+      const option = document.createElement('option');
+      option.value = shop.name;
+      option.textContent = shop.name;
+      shopSelect.appendChild(option);
+    });
+
+    // ✅ Garbage Truck Marker (animated)
+    const truckPath = [
+      [19.995, 73.78],
+      [19.996, 73.782],
+      [19.997, 73.784],
+      [19.998, 73.786],
+      [19.999, 73.788],
+      [20.000, 73.790],
+      [19.995, 73.78]
+    ];
+
+    const truck = L.marker(truckPath[0], { icon: truckIcon }).addTo(map)
+      .bindPopup("🚛 Garbage Truck");
+
+    let i = 0;
+    setInterval(() => {
+      truck.setLatLng(truckPath[i]);
+      i = (i + 1) % truckPath.length;
+    }, 2000);
+
+    // ✅ Scrap Sell Submit
+    document.getElementById('sellForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const shop = shopSelect.value;
+      const item = document.getElementById('item').value;
+      const qty = document.getElementById('quantity').value;
+      document.getElementById('status').textContent =
+        `Request sent: ${qty} kg of "${item}" to ${shop}. (Connect backend)`;
+      e.target.reset();
+    });
+
+    // ✅ Distance helper
+    function getDistance(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dLat = (lat2 - lat1) * Math.PI / 180;
+      const dLon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dLat / 2) ** 2 +
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dLon / 2) ** 2;
+      return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    }
+
+    // ✅ Nearby Dustbins
+    document.getElementById('nearbyBtn').addEventListener('click', () => {
+      if (!navigator.geolocation) {
+        alert("Geolocation is not supported.");
+        return;
+      }
+      navigator.geolocation.getCurrentPosition(pos => {
+        const { latitude, longitude } = pos.coords;
+        const dustbins = locations.filter(loc => loc.type === "Dustbin");
+        const distances = dustbins.map(d => ({
+          name: d.name,
+          coords: d.coords,
+          distance: getDistance(latitude, longitude, d.coords[0], d.coords[1])
+        }));
+        distances.sort((a, b) => a.distance - b.distance);
+
+        const nearbyList = document.getElementById('nearbyList');
+        nearbyList.innerHTML = '';
+        distances.forEach((d, i) => {
+          const li = document.createElement('li');
+          li.textContent = `${d.name} - ${d.distance.toFixed(2)} km away`;
+          nearbyList.appendChild(li);
+
+          L.circleMarker(d.coords, {
+            radius: 8,
+            color: i === 0 ? 'red' : 'blue',
+            fillColor: i === 0 ? '#f03' : '#30f',
+            fillOpacity: 0.5
+          }).addTo(map).bindPopup(`🗑 ${d.name}<br>${d.distance.toFixed(2)} km`).openPopup();
+        });
+
+        map.setView([latitude, longitude], 14);
+        L.marker([latitude, longitude]).addTo(map)
+          .bindPopup("📍 Your Location").openPopup();
+      }, () => alert("Unable to retrieve your location."));
+    });
+
+ 
+  // Icons (already defined in earlier code)
+  const allMarkers = [];  // holds active markers for cleanup
+  let truckInterval;      // for controlling truck animation
+  let truckMarker;        // actual truck marker
+
+  function clearMap() {
+    // Remove all existing markers
+    allMarkers.forEach(marker => map.removeLayer(marker));
+    allMarkers.length = 0;
+
+    // Stop truck animation if running
+    if (truckInterval) clearInterval(truckInterval);
+    if (truckMarker) map.removeLayer(truckMarker);
+  }
+
+  function showCategory(type) {
+    clearMap();
+
+    if (type === 'dustbins') {
+      locations.filter(l => l.type === "Dustbin").forEach(loc => {
+        const marker = L.marker(loc.coords, { icon: dustbinIcon }).addTo(map)
+          .bindPopup(`<b>${loc.name}</b><br>🗑️ Dustbin`);
+        allMarkers.push(marker);
+      });
+    } else if (type === 'scrapshops') {
+      locations.filter(l => l.type === "Scrap Shop").forEach(loc => {
+        const marker = L.marker(loc.coords, { icon: scrapShopIcon }).addTo(map)
+          .bindPopup(`<b>${loc.name}</b><br>🏭 Scrap Shop`);
+        allMarkers.push(marker);
+      });
+    } else if (type === 'truck') {
+      const truckPath = [
+        [19.995, 73.78],
+        [19.996, 73.782],
+        [19.997, 73.784],
+        [19.998, 73.786],
+        [19.999, 73.788],
+        [20.000, 73.790]
+      ];
+
+      let i = 0;
+      truckMarker = L.marker(truckPath[0], { icon: truckIcon }).addTo(map)
+        .bindPopup("🚛 Garbage Truck");
+      allMarkers.push(truckMarker);
+
+      truckInterval = setInterval(() => {
+        truckMarker.setLatLng(truckPath[i]);
+        i = (i + 1) % truckPath.length;
+      }, 2000);
+    }
+  }
+</script>
+
+</body>
+</html>

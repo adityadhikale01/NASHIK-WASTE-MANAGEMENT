@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Waste Management Marketplace</title>
+  <link rel="stylesheet" href="general.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" 
+  
+  referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com"   crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" href="./image/Waste_Management_logo.svg">
+  <style>
+    /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+/* Body */
+body {
+  background: #f4f9f4;
+  margin-right: 260px; /* Push content left so it won’t overlap with right panel */
+}
+
+/* Header */
+.header_of_pg {
+  background: green;
+  color: white;
+  padding: 40px;
+  text-align: center;
+}
+
+.header_of_pg h1 {
+  font-size: 28px;
+}
+
+.header_of_pg p {
+  font-size: 16px;
+  margin-top: 8px;
+}
+
+.header-content{
+  background-image: url('image/marketplace-bg.jpg');
+}
+/* Search & Filter */
+.search-filter {
+  padding: 20px;
+  text-align: center;
+}
+
+.search-filter input, .search-filter select {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Sections */
+.market-section {
+  padding: 20px;
+}
+
+.market-section h2 {
+  margin-bottom: 15px;
+  color: #1d5c32;
+}
+
+/* Cards */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  width: 200px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+}
+.card thermocol{
+  height:250px;
+}
+
+.card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.card button {
+  background: #1d5c32;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background: green;
+}
+
+/* Footer */
+.pg-footer {
+  text-align: center;
+  background: green;
+  color: white;
+  padding: 15px;
+  margin-top: 20px;
+}
+
+
+
+  </style>
+</head>
+<body>
+    
+<header>
+    <div class="logo"></div>
+    <div class="slogan">
+         <h1 >Smart City Initiative</h1>
+         <p>:Together For Cleaner City</p>
+    </div>
+  
+  </header>
+<div class="empty-box">
+
+     </div>
+       <div class="sub_header" style="top: 73px;">
+   
+    <nav>
+      <ul>       
+        <li><a href="#sell">Sell Product</a></li>  
+          <li><a href="#services">Buy Products</a></li>
+            <li><a href="#app">Digital App</a></li>     
+      </ul>
+    </nav>
+  </div>
+  <!-- Header -->
+  <div id="home" class="header_of_pg " style="height: 150px;">
+    <div class="header-content ">
+      <h1>♻️ Waste Management Marketplace</h1>
+      <h3 color="green">Empowering every citizen to keep our environment clean.</h3>
+      <p>Buy & Sell Eco-Friendly Products for a Greener Future</p>
+    </div>
+</div>
+
+  <!-- Search & Filter -->
+  <section class="search-filter">
+    <input type="text" placeholder="🔍 Search products..." id="searchBar">
+    <select id="categoryFilter">
+      <option value="all">All Categories</option>
+      <option value="compost">Compost</option>
+      <option value="granules">Granules</option>
+      <option value="thermocol">Thermocol</option>
+      <option value="plastic">Plastic</option>
+    </select>
+  </section>
+
+  <!-- Buy Section -->
+  <section class="market-section" id="services">
+    <h2>🛒 Buy Products</h2>
+    <div class="card-container">
+      <div class="card compost">
+        <img src="image/organic-compost-sell.jpg" alt="Compost">
+        <h3>Homemade Compost</h3>
+        <p>High-quality organic compost made from kitchen waste.</p>
+        <button>Buy Now</button>
+      </div>
+
+      <div class="card granules">
+        <img src="image/plastic-grannules.jpeg" alt="Granules">
+        <h3>Recycled Granules</h3>
+        <p>Durable plastic granules for industrial reuse.</p>
+        <button>Buy Now</button>
+      </div>
+
+      <div class="card thermocol">
+        <img src="image/thermacoll-sell.jpeg" alt="Thermocol">
+        <h3>Thermocol Sheets</h3>
+        <p>Reusable thermocol sheets for packaging and insulation.</p>
+        <button>Buy Now</button>
+      </div>
+
+      <div class="card plastic">
+        <img src="image/plastic-sell.jpeg" alt="Plastic">
+        <h3>Plastic Products</h3>
+        <p>Recycled plastic items available for everyday use.</p>
+        <button>Buy Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sell Section -->
+  <section class="market-section" id="sell">
+    <h2>📦 Sell Your Products</h2>
+    <div class="card-container">
+      <div class="card compost">
+        <img src="homecompost.jpg" alt="Sell Compost">
+        <h3>Sell Compost</h3>
+        <p>Have extra compost? List and sell it here!</p>
+        <button>Sell Now</button>
+      </div>
+
+      <div class="card granules">
+        <img src="granule.jpg" alt="Sell Granules">
+        <h3>Sell Granules</h3>
+        <p>Sell your processed plastic granules to industries.</p>
+        <button>Sell Now</button>
+      </div>
+
+      <div class="card thermocol">
+        <img src="thermocol.jpg" alt="Sell Thermocol">
+        <h3>Sell Thermocol</h3>
+        <p>Have reusable thermocol? Put it up for sale.</p>
+        <button>Sell Now</button>
+      </div>
+
+      <div class="card plastic">
+        <img src="plastic.jpg" alt="Sell Plastic">
+        <h3>Sell Plastic</h3>
+        <p>Sell unused or recycled plastic products directly.</p>
+        <button>Sell Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="about" class="pg-footer">
+    <p>🌱 © CodeCatalysts | Designed for Waste-Free Future !! Clean India, Green India</p>
+  </div>
+
+  <!-- ✅ Fixed Right Side Modules Panel -->
+<%- include('includes/section2.ejs') %>
+
+  <!-- Script for Search + Filter -->
+  <script>
+    const searchBar = document.getElementById('searchBar');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const cards = document.querySelectorAll('.card');
+
+    function filterCards() {
+      const searchText = searchBar.value.toLowerCase();
+      const category = categoryFilter.value;
+
+      cards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        const matchCategory = category === "all" || card.classList.contains(category);
+        card.style.display = (text.includes(searchText) && matchCategory) ? "block" : "none";
+      });
+    }
+
+    searchBar.addEventListener('input', filterCards);
+    categoryFilter.addEventListener('change', filterCards);
+  </script>
+</body>
+</html>

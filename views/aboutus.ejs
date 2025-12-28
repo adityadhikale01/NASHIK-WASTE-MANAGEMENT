@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AboutUs</title>
+    <link rel="stylesheet" href="general.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous"  
+  referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com"   crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playwrite+AU+QLD:wght@100..400&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="icon" href="./image/Waste_Management_logo.svg">
+   <title>About Us | Waste Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Earthy Green & Beige -->
+    <!-- Application Structure Plan: The application transforms the linear text document into a more engaging, user-centric single-page experience. It uses a top-down narrative flow: a strong hero statement, followed by distinct, visually separated sections for Mission, Identity, Services, and Sustainability. The key interaction is the "What We Do" section, which uses a clickable card layout instead of a static bulleted list. This allows users to quickly select and view the service details most relevant to them, enhancing usability and information discovery. A sticky navigation bar facilitates easy movement between these thematic sections, making the structure more explorable than a simple text page. This design was chosen to guide the user through the company's story while prioritizing quick access to their service offerings. -->
+    <!-- Visualization & Content Choices: Report Info: Mission statement -> Goal: Inform -> Presentation: Themed section with icons -> Interaction: None -> Justification: Clearly presents core values. | Report Info: Company background -> Goal: Organize -> Presentation: Simple vertical timeline with HTML/CSS -> Interaction: None -> Justification: Visually breaks up text, shows history simply. | Report Info: List of 4 services -> Goal: Inform/Organize -> Presentation: Interactive card grid -> Interaction: On-click to reveal detailed descriptions -> Justification: Allows user self-selection of information, more engaging than a list. | Report Info: Sustainability commitment -> Goal: Inform -> Presentation: Themed section with stat-like callouts and icons -> Interaction: None -> Justification: Highlights key commitments visually. All icons are Unicode characters, avoiding graphics. No quantitative data was present in the source, so no charts were used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+            color: #383838;
+        }
+        .bg-image-for-aboutus{
+            height: 300px;
+            background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;    
+            border-radius: 12px;
+        }
+        .nav-link {
+            transition: color 0.3s, border-bottom-color 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #348452;
+            border-bottom-color: #348452;
+        }
+        .service-card {
+            transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+            border-width: 2px;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .service-card.active {
+            border-color: #348452;
+            background-color: #F0FDF4;
+        }
+        .service-details {
+            display: none;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.7s ease-in-out, opacity 0.7s ease-in-out;
+            opacity: 0;
+        }
+        .service-details.show {
+            display: block;
+            max-height: 500px;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- section1 -->
+<div class="section1">  
+    <header>
+    <div class="logo"></div>
+    <div class="slogan">
+         <h1 style="font-size: 28px;">Smart City Initiative</h1>
+         <p>:Together For Cleaner City</p>
+    </div>
+  
+    </header>
+    <div class="empty-box">
+
+    </div>
+    <div class="sub_header" style="top: 73px;">
+   
+    <nav>
+      <ul>
+       
+        <li><a href="#mission">Our Mission</a></li>
+        <li><a href="#about">Who We Are</a></li>
+        <li><a href="#services">What We Do</a></li>
+        <li><a href="#app">Digital App</a></li>
+        <li><a href="#sustainability">Sustainability</a></li>
+      </ul>
+    </nav>
+    </div>
+    <div class="antialiased">
+
+    <main>
+        <section class="bg-white py-20 md:py-32 bg-image-for-aboutus">
+            <div class="container mx-auto px-6 text-center ">
+                <h2 class="text-4xl md:text-6xl font-bold text-gray-800 leading-tight " style="color: #F0FDF4;">Creating a Cleaner, Greener Future.</h2>
+                <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">We are your partners in responsible waste management, committed to environmental stewardship and a healthier planet for our community.</p>
+            </div>
+        </section>
+        <div class="empty" style="height: 100px; background-color: #F0FDF4;">
+
+        </div>
+
+        <section id="mission" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-800">Our Mission</h3>
+                    <p class="mt-4 text-lg text-gray-600">
+                        At [Your Company Name], our mission is to create a cleaner, greener future for our community. We believe that effective waste management is more than just a service—it's a commitment to environmental stewardship and a healthier planet. Our goal is to make responsible waste disposal and recycling accessible, efficient, and simple for everyone.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="bg-white py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-800">Who We Are</h3>
+                </div>
+                <div class="max-w-4xl mx-auto mt-12 grid md:grid-cols-2 gap-12 items-center">
+                    <div class="text-center md:text-left">
+                        <p class="text-lg text-gray-600">
+                            Founded in [Year], [Your Company Name] was created with a vision to revolutionize waste management. We saw a need for a service that not only handles waste but also educates and empowers our customers to reduce their environmental footprint. We are a team of dedicated professionals who are passionate about sustainability and committed to providing exceptional service.
+                        </p>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-300 before:to-transparent">
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                                <div class="flex items-center justify-center w-10 h-10 rounded-full border-2 border-white bg-gray-300 group-hover:bg-[#348452] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                                    <span class="text-xl">💡</span>
+                                </div>
+                                <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded-lg border border-gray-200 shadow">
+                                    <div class="flex items-center justify-between space-x-2">
+                                        <div class="font-bold text-gray-800">Founded with a Vision</div>
+                                        <time class="font-medium text-sm text-[#348452]">[Year]</time>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+                                <div class="flex items-center justify-center w-10 h-10 rounded-full border-2 border-white bg-gray-300 group-hover:bg-[#348452] text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
+                                     <span class="text-xl">🌱</span>
+                                </div>
+                                <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white p-4 rounded-lg border border-gray-200 shadow">
+                                    <div class="font-bold text-gray-800">Growing Our Impact</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-800">What We Do</h3>
+                    <p class="mt-4 text-lg text-gray-600">
+                        We offer a comprehensive range of waste management solutions tailored to meet the needs of residential, commercial, and industrial clients. Click on a service below to learn more.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
+                    <div class="service-card cursor-pointer p-6 bg-white rounded-lg border-gray-200 text-center" data-target="residential">
+                        <div class="text-4xl mb-4">🏠</div>
+                        <h4 class="text-xl font-semibold text-gray-800">Residential Collection</h4>
+                    </div>
+                    <div class="service-card cursor-pointer p-6 bg-white rounded-lg border-gray-200 text-center" data-target="commercial">
+                        <div class="text-4xl mb-4">🏢</div>
+                        <h4 class="text-xl font-semibold text-gray-800">Commercial Solutions</h4>
+                    </div>
+                    <div class="service-card cursor-pointer p-6 bg-white rounded-lg border-gray-200 text-center" data-target="recycling">
+                        <div class="text-4xl mb-4">♻️</div>
+                        <h4 class="text-xl font-semibold text-gray-800">Recycling Programs</h4>
+                    </div>
+                    <div class="service-card cursor-pointer p-6 bg-white rounded-lg border-gray-200 text-center" data-target="specialty">
+                        <div class="text-4xl mb-4">🧪</div>
+                        <h4 class="text-xl font-semibold text-gray-800">Specialty Waste</h4>
+                    </div>
+                </div>
+
+                <div id="service-details-container" class="mt-8">
+                    <div id="residential" class="service-details bg-white p-8 rounded-lg shadow-inner">
+                        <h4 class="text-2xl font-bold text-[#348452] mb-2">Residential Collection</h4>
+                        <p class="text-gray-600">Dependable and scheduled pickup services for households, ensuring your waste is managed responsibly.</p>
+                    </div>
+                    <div id="commercial" class="service-details bg-white p-8 rounded-lg shadow-inner">
+                        <h4 class="text-2xl font-bold text-[#348452] mb-2">Commercial Solutions</h4>
+                        <p class="text-gray-600">Customized plans for businesses of all sizes, helping you streamline your waste disposal and recycling processes.</p>
+                    </div>
+                    <div id="recycling" class="service-details bg-white p-8 rounded-lg shadow-inner">
+                        <h4 class="text-2xl font-bold text-[#348452] mb-2">Recycling Programs</h4>
+                        <p class="text-gray-600">Promoting a circular economy by sorting and processing recyclable materials, including paper, plastic, glass, and metal.</p>
+                    </div>
+                    <div id="specialty" class="service-details bg-white p-8 rounded-lg shadow-inner">
+                        <h4 class="text-2xl font-bold text-[#348452] mb-2">Specialty Waste Services</h4>
+                        <p class="text-gray-600">Safe and compliant handling of hazardous materials, e-waste, and other specialty items.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="sustainability" class="bg-white py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-4xl mx-auto">
+                    <h3 class="text-3xl md:text-4xl font-bold text-gray-800">Our Commitment to Sustainability</h3>
+                    <p class="mt-4 text-lg text-gray-600">
+                        We are dedicated to operating in a way that minimizes our impact on the environment. We continuously invest in modern, fuel-efficient vehicles and innovative sorting technologies to maximize recycling rates and reduce landfill waste. Our commitment goes beyond our services; we actively engage in community outreach to promote waste reduction and eco-friendly practices.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-lg">Thank you for choosing [Your Company Name].</p>
+            <p class="mt-2 text-gray-400">Together, we can make a difference.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const serviceCards = document.querySelectorAll('.service-card');
+            const serviceDetails = document.querySelectorAll('.service-details');
+            let activeDetail = null;
+
+            serviceCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const targetId = card.dataset.target;
+                    const targetDetail = document.getElementById(targetId);
+
+                    serviceCards.forEach(c => c.classList.remove('active'));
+                    
+                    if (activeDetail && activeDetail === targetDetail) {
+                        activeDetail.classList.remove('show');
+                        activeDetail = null;
+                    } else {
+                        serviceDetails.forEach(detail => detail.classList.remove('show'));
+                        card.classList.add('active');
+                        targetDetail.classList.add('show');
+                        activeDetail = targetDetail;
+                    }
+                });
+            });
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.4
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href').substring(1) === entry.target.id) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+    </div>
+  
+
+</div>
+<!-- section2 -->
+  
+<%- include('includes/section2.ejs') %>
+
+    
+</body>
+</html>
